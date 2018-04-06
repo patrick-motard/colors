@@ -3,25 +3,15 @@ var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs'));
 var rl = require('readline');
 
-// module.exports = colors => {
-//     return fs.createReadStreamAsync('index.js', 'utf8')
-//         .then(res => {
-//             console.log(res);
-//         })
-//         .catch(e => console.log(e));
-//     // return colors.map(color => {
-//     //     var hex = color.split(' ')[2];
-//     //     var rgb = hr(hex);
-//     //     console.log(`hex: ${hex}, rgb: ${rgb}`);
-//     // });
-// }
 
 module.exports = () => {
     var file = process.argv[2];
     var index = 0;
+    var colors = [];
     function withLines(lines) {
         lines.forEach(function(line) {
-            console.log(index + " " + line);
+            var rgb = hr(line.split(' ')[2]);
+            console.log(`    nord${index}: rgb(${rgb.red}, ${rgb.green}, ${rgb.blue}, 100 %);`);
             index++;
         });
     }
